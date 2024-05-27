@@ -9,24 +9,26 @@ import edu.webclass.restapi.Product.Management.System.models.entity.User;
 import edu.webclass.restapi.Product.Management.System.models.enums.UserState;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 
 public class AdminService {
-    ////////////////////////////////???????????
     private final UserRepository userRepository;
-    public ResponseEntity<?> setActiveStatus(String username, boolean active) {
-        User user = userRepository.findByName(username);
-        if (user == null) {
+
+    public ResponseEntity<String> setActiveStatus(String username, boolean active) {
+        Optional<User> optionalUser = userRepository.findByName(username);
+        if (optionalUser.isEmpty()) {
             return ResponseEntity.badRequest().body("User not found");
         }
+        User user = optionalUser.get();
         user.setActive(active ? UserState.ACTIVE : UserState.INACTIVE);
         userRepository.save(user);
         return ResponseEntity.ok().body("User " + username + " " + (active ? "activated" : "deactivated"));
     }
-    public ResponseEntity<?> listUsers() {
-        List<User> users = userRepository.findAll();
-        return ResponseEntity.ok(users);
+
+    public List<User> listUsers() {
+        return userRepository.findAll();
     }
 }

@@ -13,14 +13,15 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private AdminService adminService;
-    @PutMapping("/users?username={username}&active={active}") ///////???????
-    public ResponseEntity<?> setActiveStatus(@PathVariable String username, @PathVariable boolean active) {
+    private AdminService adminService;//http://file/1234 path variable
+    @PutMapping("/users")
+    public ResponseEntity<String> setActiveStatus(@RequestParam("username") String username,
+                                             @RequestParam("active") boolean active) {
         return adminService.setActiveStatus(username, active);
     }
     @GetMapping("/users")
     public ResponseEntity<List<User>> listUsers() {
-        List<User> users = (List<User>) adminService.listUsers();
+        List<User> users = adminService.listUsers();
         return ResponseEntity.ok(users);
     }
 }
