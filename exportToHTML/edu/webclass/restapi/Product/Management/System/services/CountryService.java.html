@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>CountryService.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CountryService.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">webclass</span><span class="s2">.</span><span class="s1">restapi</span><span class="s2">.</span><span class="s1">Product</span><span class="s2">.</span><span class="s1">Management</span><span class="s2">.</span><span class="s1">System</span><span class="s2">.</span><span class="s1">services</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">webclass</span><span class="s2">.</span><span class="s1">restapi</span><span class="s2">.</span><span class="s1">Product</span><span class="s2">.</span><span class="s1">Management</span><span class="s2">.</span><span class="s1">System</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Country</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">webclass</span><span class="s2">.</span><span class="s1">restapi</span><span class="s2">.</span><span class="s1">Product</span><span class="s2">.</span><span class="s1">Management</span><span class="s2">.</span><span class="s1">System</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">response</span><span class="s2">.</span><span class="s1">CountryResponse</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">webclass</span><span class="s2">.</span><span class="s1">restapi</span><span class="s2">.</span><span class="s1">Product</span><span class="s2">.</span><span class="s1">Management</span><span class="s2">.</span><span class="s1">System</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">response</span><span class="s2">.</span><span class="s1">ExternalCountriesResponse</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">webclass</span><span class="s2">.</span><span class="s1">restapi</span><span class="s2">.</span><span class="s1">Product</span><span class="s2">.</span><span class="s1">Management</span><span class="s2">.</span><span class="s1">System</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">response</span><span class="s2">.</span><span class="s1">GetAllCountriesResponse</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">edu</span><span class="s2">.</span><span class="s1">webclass</span><span class="s2">.</span><span class="s1">restapi</span><span class="s2">.</span><span class="s1">Product</span><span class="s2">.</span><span class="s1">Management</span><span class="s2">.</span><span class="s1">System</span><span class="s2">.</span><span class="s1">services</span><span class="s2">.</span><span class="s1">external_service</span><span class="s2">.</span><span class="s1">ExternalService</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">lombok</span><span class="s2">.</span><span class="s1">RequiredArgsConstructor</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">beans</span><span class="s2">.</span><span class="s1">factory</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">Autowired</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">http</span><span class="s2">.</span><span class="s1">HttpStatus</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">stereotype</span><span class="s2">.</span><span class="s1">Service</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">web</span><span class="s2">.</span><span class="s1">client</span><span class="s2">.</span><span class="s1">RestTemplate</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">http</span><span class="s2">.</span><span class="s1">ResponseEntity</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Optional</span><span class="s2">;</span>
+
+<span class="s1">@Service</span>
+<span class="s1">@RequiredArgsConstructor</span>
+<span class="s0">public class </span><span class="s1">CountryService </span><span class="s2">{</span>
+    <span class="s0">private final </span><span class="s1">ExternalService externalService</span><span class="s2">;</span>
+    <span class="s0">private final </span><span class="s1">RestTemplate restTemplate</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">ResponseEntity</span><span class="s2">&lt;</span><span class="s1">GetAllCountriesResponse</span><span class="s2">&gt; </span><span class="s1">getAllCountries</span><span class="s2">() {</span>
+        <span class="s1">Optional</span><span class="s2">&lt;</span><span class="s1">ExternalCountriesResponse</span><span class="s2">&gt; </span><span class="s1">response </span><span class="s2">= </span><span class="s1">externalService</span><span class="s2">.</span><span class="s1">getAllCountries</span><span class="s2">();</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">response</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) </span><span class="s0">return new </span><span class="s1">ResponseEntity</span><span class="s2">&lt;&gt;(</span><span class="s1">HttpStatus</span><span class="s2">.</span><span class="s1">SERVICE_UNAVAILABLE</span><span class="s2">);</span>
+        <span class="s1">ExternalCountriesResponse countries </span><span class="s2">= </span><span class="s1">response</span><span class="s2">.</span><span class="s1">get</span><span class="s2">();</span>
+        <span class="s1">GetAllCountriesResponse getAllCountriesResponse </span><span class="s2">= </span><span class="s1">GetAllCountriesResponse</span>
+                <span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">count</span><span class="s2">(</span><span class="s1">countries</span><span class="s2">.</span><span class="s1">getData</span><span class="s2">().</span><span class="s1">size</span><span class="s2">())</span>
+                <span class="s2">.</span><span class="s1">countries</span><span class="s2">(</span><span class="s1">countries</span><span class="s2">.</span><span class="s1">getData</span><span class="s2">().</span><span class="s1">stream</span><span class="s2">()</span>
+                        <span class="s2">.</span><span class="s1">map</span><span class="s2">(</span><span class="s1">country -&gt; CountryResponse</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                                <span class="s2">.</span><span class="s1">name</span><span class="s2">(</span><span class="s1">country</span><span class="s2">.</span><span class="s1">getCountry</span><span class="s2">()).</span><span class="s1">build</span><span class="s2">()).</span><span class="s1">toList</span><span class="s2">()).</span><span class="s1">build</span><span class="s2">();</span>
+        <span class="s0">return new </span><span class="s1">ResponseEntity</span><span class="s2">&lt;&gt;(</span><span class="s1">getAllCountriesResponse</span><span class="s2">, </span><span class="s1">HttpStatus</span><span class="s2">.</span><span class="s1">OK</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
